@@ -7,12 +7,19 @@ import { Provider } from "react-redux";
 
 const store = configureStore({ reducer: rootReducer });
 
+function AppContainer() {
+  return (
+    <React.StrictMode>
+      <RealStoreProvider store={store}>
+        <App />
+      </RealStoreProvider>
+    </React.StrictMode>
+  );
+}
+
+function RealStoreProvider({ children }) {
+  return <Provider store={store}>{children}</Provider>;
+}
+
 const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  rootElement
-);
+ReactDOM.render(<AppContainer />, rootElement);
