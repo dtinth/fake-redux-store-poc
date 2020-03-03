@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
-import { useUser } from "./users";
-import { useCurrentUserId } from "./userSession";
+import { useUser } from "./features/users";
+import { useCurrentUserId } from "./features/userSession";
 
 export default function App() {
   const currentUserId = useCurrentUserId();
