@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { memoize } from "lodash";
+import { provideFakeSelectorResult } from "../fake-redux-store";
 
 const { reducer } = createSlice({
   name: "users",
@@ -14,7 +15,11 @@ const { reducer } = createSlice({
   }
 });
 
-const selectUserById = memoize(userId => state => state.users[userId]);
+const selectUserById = memoize(userId =>
+  provideFakeSelectorResult(state => state.users[userId], {
+    name: `User ${userId}`
+  })
+);
 
 export function useUser(userId) {
   return useSelector(selectUserById(userId));

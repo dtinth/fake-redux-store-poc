@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
+import { provideFakeSelectorResult } from "../fake-redux-store";
 
 const { reducer } = createSlice({
   name: "userSession",
@@ -8,7 +9,10 @@ const { reducer } = createSlice({
   }
 });
 
-const selectCurrentUserId = state => state.userSession.currentUserId;
+const selectCurrentUserId = provideFakeSelectorResult(
+  state => state.userSession.currentUserId,
+  "fakeuser"
+);
 
 export function useCurrentUserId() {
   return useSelector(selectCurrentUserId);
